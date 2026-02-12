@@ -1,0 +1,26 @@
+
+D:\Adarsh2\assignment>curl -X POST http://localhost:3000/auth/login -H "Content-Type: application/json" -d "{\"email\":\"adarshmaurya.dev@gmail.com\",\"password\":\"12345\"}"
+{"message":"OTP sent","loginSessionId":"lsoqu"}
+D:\Adarsh2\assignment>curl -c cookies.txt -X POST http://localhost:3000/auth/verify-otp -H "Content-Type: application/json" -d "{\"loginSessionId\":\"lsoqu\",\"otp\":\"203858\"}"
+{"message":"OTP verified","sessionId":"lsoqu"}
+D:\Adarsh2\assignment>curl -b cookies.txt -X POST http://localhost:3000/auth/token
+{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkYXJzaG1hdXJ5YS5kZXZAZ21haWwuY29tIiwic2Vzc2lvbklkIjoibHNvcXUiLCJpYXQiOjE3NzA4NzMxMTksImV4cCI6MTc3MDg3NDAxOX0.liOiG0p0TMWDVuBZVZsImu5XuSMVfGT4tOykXkTksQI","expires_in":900}
+D:\Adarsh2\assignment>curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkYXJzaG1hdXJ5YS5kZXZAZ21haWwuY29tIiwic2Vzc2lvbklkIjoibHNvcXUiLCJpYXQiOjE3NzA4NzMxMTksImV4cCI6MTc3MDg3NDAxOX0.liOiG0p0TMWDVuBZVZsImu5XuSMVfGT4tOykXkTksQI" http://localhost:3000/protected
+{"message":"Access granted","user":{"email":"adarshmaurya.dev@gmail.com","sessionId":"lsoqu","iat":1770873119,"exp":1770874019},"success_flag":"FLAG-YWRhcnNobWF1cnlhLmRldkBnbWFpbC5jb21fQ09NUExFVEVEX0FTU0lHTk1FTlQ="}
+
+
+-----------
+server logs
+-----------
+
+Server running at http://localhost:3000
+POST /auth/login
+[OTP] Session lsoqu generated
+OTP : 203858
+POST /auth/login -> 200 (25ms)
+POST /auth/verify-otp
+POST /auth/verify-otp -> 200 (3ms)
+POST /auth/token
+POST /auth/token -> 200 (6ms)
+GET /protected
+GET /protected -> 200 (4ms)
