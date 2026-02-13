@@ -43,7 +43,7 @@ app.post("/auth/login", (req, res) => {
       email,
       password,
       createdAt: Date.now(),
-      expiresAt: Date.now() + 10 * 60 * 1000, // 2 minutes
+      expiresAt: Date.now() + 2 * 60 * 1000, // 2 minutes
     };
 
     // Store OTP
